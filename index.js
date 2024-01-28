@@ -17,6 +17,8 @@ jwtClient.authorize(function(err, tokens) {
     return;
   }
 
+  const line = 'https://cryptonewsletter.github.io/' + process.env.URL;
+
   const items = 
         JSON.stringify({
           url: line,
