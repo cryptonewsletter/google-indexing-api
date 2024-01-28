@@ -27,11 +27,10 @@ jwtClient.authorize(function(err, tokens) {
     };
 
   const options = {
-    url: 'https://klk.in.edst.com/apiserver/api/v1/ask/search/docs',
+    url: 'https://indexing.googleapis.com/v3/urlNotifications:publish',
     method: 'POST',
     headers: {
        'Content-Type': 'application/json',
-       'Accept-Charset': 'utf-8'
      },
     body: items
  };
