@@ -32,6 +32,7 @@ jwtClient.authorize(function(err, tokens) {
     headers: {
        'Content-Type': 'application/json',
      },
+    auth: { bearer: tokens.access_token },
     body: items
  };
 
