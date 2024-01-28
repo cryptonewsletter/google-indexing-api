@@ -17,14 +17,11 @@ jwtClient.authorize(function(err, tokens) {
     return;
   }
 
-  const items = {
-        'POST /v3/urlNotifications:publish HTTP/1.1\n' +
-        'Content-Type: application/json\n\n' +
+  const items = 
         JSON.stringify({
           url: line,
           type: 'URL_UPDATED'
-        })
-    };
+        });
 
   const options = {
     url: 'https://indexing.googleapis.com/v3/urlNotifications:publish',
@@ -37,7 +34,7 @@ jwtClient.authorize(function(err, tokens) {
  };
 
 request.post(options, (err, res, body) => {
-    if (err) {
+    if (err) { él
         return console.log(err);
     }
     //console.log(`Status: ${res.statusCode}`);
