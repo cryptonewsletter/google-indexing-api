@@ -11,22 +11,13 @@ const jwtClient = new google.auth.JWT(
   null
 );
 
-const batch = fs
-  .readFileSync('urls.txt')
-  .toString()
-  .split('\n');
-
 jwtClient.authorize(function(err, tokens) {
   if (err) {
     console.log(err);
     return;
   }
 
-  const items = batch.map(line => {
-    return {
-      'Content-Type': 'application/http',
-      'Content-ID': '',
-      body:
+  const items = {
         'POST /v3/urlNotifications:publish HTTP/1.1\n' +
         'Content-Type: application/json\n\n' +
         JSON.stringify({
@@ -34,18 +25,22 @@ jwtClient.authorize(function(err, tokens) {
           type: 'URL_UPDATED'
         })
     };
-  });
 
   const options = {
-    url: 'https://indexing.googleapis.com/batch',
+    url: 'https://klk.in.edst.com/apiserver/api/v1/ask/search/docs',
     method: 'POST',
     headers: {
-      'Content-Type': 'multipart/mixed'
-    },
-    auth: { bearer: tokens.access_token },
-    multipart: items
-  };
-  request(options, (err, resp, body) => {
+       'Content-Type': 'application/json',
+       'Accept-Charset': 'utf-8'
+     },
+    body: items
+ };
+
+request.post(options, (err, res, body) => {
+    if (err) {
+        return console.log(err);
+    }
+    //console.log(`Status: ${res.statusCode}`);
+    //res.write(response.statusCode.toString());
     console.log(body);
-  });
 });
